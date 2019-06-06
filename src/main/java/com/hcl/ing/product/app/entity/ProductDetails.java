@@ -11,39 +11,39 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PRODUCT_DETAILS")
+@Table(name = "PRODUCT_DETAILS")
 public class ProductDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productDetailsId;
-	
+
 	@Column
 	private String interestRate;
-	
+
 	@Column
 	private String percentage;
-	
+
 	@Column
 	private String special;
-	
+
 	@Column
 	private String withdrawl;
-	
+
 	@Column
 	private String minInvestment;
-	
+
 	@Column
 	private String maxInvestment;
-	
+
 	@Column
 	private String duration;
-	
+
 	@OneToOne
 	private Product product;
-	
+
 	public ProductDetails() {
 		super();
 	}
@@ -119,10 +119,13 @@ public class ProductDetails implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "ProductDetails [productDetailsId=" + productDetailsId + ", interestRate=" + interestRate
+				+ ", percentage=" + percentage + ", special=" + special + ", withdrawl=" + withdrawl
+				+ ", minInvestment=" + minInvestment + ", maxInvestment=" + maxInvestment + ", duration=" + duration
+				+ ", product=" + product + "]";
+	}
+
 }

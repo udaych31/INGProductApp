@@ -14,5 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	@Query(value = "select p.product_id,p.product_name from product p where p.product_group_id=:productGroupId",nativeQuery = true)
 	public List<Object[]> getAllSubProjects(@Param("productGroupId") Long productGroupId);
+	
+	public Product findByProductId(Long productId);
 
 }

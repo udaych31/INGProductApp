@@ -93,11 +93,12 @@ public class ProductServiceImpl implements ProductService {
 					details.add(detailsDto);
 
 				}
+				increaseCount(productId);
 				prodDetails = new ProductDetailsByProduct();
 				prodDetails.setProductdetils(details);
-				prodDetails.setStatus("SUCCESS");
+				prodDetails.setStatus(SUCCESS);
 				prodDetails.setStatusCode(200);
-
+				
 			}
 		} catch (Exception e) {
 			logger.error(logger.getClass().getName() + "  get all products" + e.getMessage());

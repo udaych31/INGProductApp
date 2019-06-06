@@ -12,14 +12,18 @@ import com.hcl.ing.product.app.dto.ProductGroupListResponse;
 import com.hcl.ing.product.app.dto.ProductGroupLlist;
 import com.hcl.ing.product.app.dto.ProductList;
 import com.hcl.ing.product.app.dto.ProductListResponse;
+import com.hcl.ing.product.app.entity.Product;
 import com.hcl.ing.product.app.repository.ProductGroupRepository;
 import com.hcl.ing.product.app.repository.ProductRepository;
+import com.hcl.ing.product.app.util.ApiResponse;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 	
 	
 	private static final Logger logger=LogManager.getLogger(ProductServiceImpl.class);
+	
+	private static final String SUCCESS="SUCCESS";
 	
 	@Autowired
 	private ProductGroupRepository productGroupRepository; 
@@ -43,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 			});
 			response=new ProductGroupListResponse();
 			response.setProductsList(groupList);
-			response.setStatus("SUCCESS");
+			response.setStatus(SUCCESS);
 			response.setStatusCode(200);
 			
 		} catch (Exception e) {
@@ -68,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 			});
 			response=new ProductListResponse();
 			response.setProductList(groupList);
-			response.setStatus("SUCCESS");
+			response.setStatus(SUCCESS);
 			response.setStatusCode(200);
 			
 		} catch (Exception e) {
@@ -76,6 +80,54 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		return response;
+	}
+	
+	@Override
+	public ApiResponse increaseCount(Long productId) {
+		ApiResponse response=null;
+		try {
+			Product product = productRepository.findByProductId(productId);
+			if(product!=null) {
+				Integer count = product.getCount();
+				Integer actual=count+1;
+				product.setCount(actual);
+				productRepository.save(product);
+				response=new ApiResponse();
+				response.setStatus(SUCCESS);
+				response.setStatusCode(200);
+			}
+		} catch (Exception e) {
+			logger.error(this.getClass().getName()+" overViewCount :"+e.getMessage());
+		}
+		
+		return response;
+	}
+	
+	@Override
+	public ProductGroupListResponse overView() {
+		ProductGroupListResponse response=null;
+		try {
+			List<Object[]> allProducts = productGroupRepository.overView();
+			List<ProductGroupLlist> groupList=new ArrayList<>();
+			allProducts.stream().forEach(obj->{
+				ProductGroupLlist list=new ProductGroupLlist();
+				list.setProductGroupId(Long.parseLong(""+obj[0]));
+				list.setProductGroupName(""+obj[1]);
+				list.setCount(Integer.parseInt(""+obj[2]));
+				groupList.add(list);
+				
+			});
+			response=new ProductGroupListResponse();
+			response.setProductsList(groupList);
+			response.setStatus(SUCCESS);
+			response.setStatusCode(200);
+			
+		} catch (Exception e) {
+			logger.error(this.getClass().getName()+" getAllProducts :"+e.getMessage());
+		}
+		
+		return response;
+
 	}
 	
 }

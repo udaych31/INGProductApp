@@ -18,8 +18,10 @@ import com.hcl.ing.product.app.dto.ProductGroupListResponse;
 import com.hcl.ing.product.app.dto.ProductGroupLlist;
 import com.hcl.ing.product.app.dto.ProductList;
 import com.hcl.ing.product.app.dto.ProductListResponse;
+import com.hcl.ing.product.app.entity.Product;
 import com.hcl.ing.product.app.repository.ProductGroupRepository;
 import com.hcl.ing.product.app.repository.ProductRepository;
+import com.hcl.ing.product.app.util.ApiResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceImplTest {
@@ -77,6 +79,44 @@ public class ProductServiceImplTest {
 		assertEquals(actual, expLong);
 		
 	}
+	
+	@Test
+	public void overViewTest() {
+		
+		List<Object[]> list=new ArrayList<>();
+		Object[] arr= {1,"Mortgage",7};
+		Object[] arr2= {2,"Payments",0};
+		list.add(arr2);
+		list.add(arr);
+		
+		when(productGroupRepository.overView()).thenReturn(list);
+		ProductGroupListResponse allProducts = productServiceImpl.overView();
+		List<ProductGroupLlist> productsList = allProducts.getProductsList();
+		Long actual=Long.valueOf(""+list.size());
+		Long expLong=Long.valueOf(""+productsList.size());
+		assertEquals(actual, expLong);
+		
+		
+	}
+	
+	@Test
+	public void increaseCountTest() {
+		
+		Product p=new Product();
+		p.setProductId(1L);
+		p.setCount(7);
+		p.setProductName("saving");
+		when(productRepository.findByProductId(1L)).thenReturn(p);
+		 ApiResponse increaseCount = productServiceImpl.increaseCount(1L);
+		 if(increaseCount!=null) {
+			 Integer statusCode = increaseCount.getStatusCode();
+			 Double actual=Double.valueOf(""+statusCode);
+			 Double exp=200.0;
+			 assertEquals(exp, actual);
+		 }
+		
+	}
+	
 	
 	
 }

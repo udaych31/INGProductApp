@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.ing.product.app.dto.ProductGroupListResponse;
 import com.hcl.ing.product.app.dto.ProductListResponse;
 import com.hcl.ing.product.app.service.ProductServiceImpl;
+import com.hcl.ing.product.app.util.ApiResponse;
 
 @RestController
 @CrossOrigin
@@ -29,6 +30,16 @@ public class ProductController {
 	@GetMapping("/getSubProducts")
 	public ProductListResponse getAllSubProductGroups(@RequestParam("productGroupId") Long productGroupId) {
 		return productServiceImpl.getAllSubProducts(productGroupId);
+	}
+	
+	@GetMapping("/increaseCount")
+	public ApiResponse increaseCount(@RequestParam("productId") Long productId) {
+		return productServiceImpl.increaseCount(productId);
+	}
+	
+	@GetMapping("/overView")
+	public ProductGroupListResponse overView() {
+		return productServiceImpl.overView();
 	}
 	
 

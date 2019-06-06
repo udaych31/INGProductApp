@@ -60,7 +60,12 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+<distributionManagement>
+		<snapshotRepository>
+			<id>nexusabc</id>
+			<url>http://13.233.166.249:8081/nexus/content/repositories/nexusabc/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>

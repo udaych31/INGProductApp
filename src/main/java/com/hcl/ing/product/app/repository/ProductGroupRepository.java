@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.hcl.ing.product.app.dto.ProductGroupLlist;
 import com.hcl.ing.product.app.entity.ProductGroup;
 
 @Repository

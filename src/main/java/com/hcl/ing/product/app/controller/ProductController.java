@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.ing.product.app.dto.ProductDetailsByProduct;
+import com.hcl.ing.product.app.dto.ProductGroupListResponse;
+import com.hcl.ing.product.app.dto.ProductListResponse;
 import com.hcl.ing.product.app.service.ProductService;
 
 @RestController
@@ -22,6 +24,18 @@ public class ProductController {
 	  
 	@Autowired
 	ProductService productService;
+		
+	@GetMapping("/getAllProducts")
+	public ProductGroupListResponse getAllProductGroups() {
+		return productService.getAllProducts();
+	}
+	
+	
+	@GetMapping("/getSubProducts")
+	public ProductListResponse getAllSubProductGroups(@RequestParam("productGroupId") Long productGroupId) {
+		return productService.getAllSubProducts(productGroupId);
+	}
+	
 	
 	@GetMapping("/getProductDetails")
 	public ProductDetailsByProduct getProductDetails(@RequestParam Long productId) {
@@ -32,6 +46,7 @@ public class ProductController {
 		
 		
 	}
+	
 	
 
 }

@@ -2,13 +2,10 @@ package com.hcl.ing.product.app.dto;
 
 import java.io.Serializable;
 
-import com.hcl.ing.product.app.entity.Product;
-
 public class ProductDetailsDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long productDetailsId;
 	private String interestRate;
 	private String percentage;
 	private String special;
@@ -16,15 +13,6 @@ public class ProductDetailsDto implements Serializable {
 	private String minInvestment;
 	private String maxInvestment;
 	private String duration;
-	private Product product;
-
-	public Long getProductDetailsId() {
-		return productDetailsId;
-	}
-
-	public void setProductDetailsId(Long productDetailsId) {
-		this.productDetailsId = productDetailsId;
-	}
 
 	public String getInterestRate() {
 		return interestRate;
@@ -80,14 +68,6 @@ public class ProductDetailsDto implements Serializable {
 
 	public void setDuration(String duration) {
 		this.duration = duration;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 
 }

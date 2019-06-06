@@ -1,4 +1,6 @@
-package com.hcl.INGProductApp;
+package com.hcl.ing.product.app;
+
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,7 @@ public class IngProductAppApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		assertTrue(true);
 	}
 
 }

@@ -3,10 +3,12 @@ package com.hcl.ing.product.app.dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class ProductDetailsByProduct implements Serializable {
+import com.hcl.ing.product.app.util.ApiResponse;
+
+public class ProductDetailsByProduct extends ApiResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private List<ProductDetailsDto> productdetils;
 
 	public List<ProductDetailsDto> getProductdetils() {
